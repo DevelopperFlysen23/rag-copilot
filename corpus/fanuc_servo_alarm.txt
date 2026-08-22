@@ -1,0 +1,8 @@
+Fanuc Servo Alarm 4xx - OVC (Overcurrent)
+Symptom: SV0401 alarm, servo amplifier overcurrent.
+Checks:
+- Measure insulation resistance of the motor windings (>10 M ohm).
+- Verify servo parameter No.2020 (motor ID) is correct.
+- Check for mechanical binding on the axis.
+- Inspect the amplifier module for a failed IGBT.
+Recovery: power cycle, run manual feed with reduced gain, and replace the amplifier if the fault persists.

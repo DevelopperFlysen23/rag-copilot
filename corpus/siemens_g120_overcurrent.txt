@@ -1,0 +1,8 @@
+Siemens SINAMICS G120 - F7802 Overtemperature / A07910
+Symptom: Drive trips on overcurrent during acceleration.
+Checks:
+- Verify motor cable shield is grounded at both ends.
+- Check I2t monitoring (P0641) and raise ramp time (P1120/P1121) if the mechanical load spikes.
+- Inspect for a short between U/V/W phases.
+- Confirm rated motor current P0305 matches the nameplate.
+Recovery: clear the fault with ACK, reduce the load profile, then re-run motor auto-tuning (P1900=2).

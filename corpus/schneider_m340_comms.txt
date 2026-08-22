@@ -1,0 +1,8 @@
+Schneider Electric M340 - Unity Pro / Modbus TCP comms loss
+Symptom: PLC drops Modbus TCP sessions to the SCADA host.
+Checks:
+- Confirm CPU ETH port link and check for an IP conflict on the VLAN.
+- Verify the %MW addressing range matches the HMI tag table.
+- Increase the watchdog (IO scanner timeout) to 500 ms.
+- Check the switch spanning-tree state for a blocking port.
+Recovery: rebuild the IO scanner, ping the gateway, and reboot the NOC switch if CRC errors climb.

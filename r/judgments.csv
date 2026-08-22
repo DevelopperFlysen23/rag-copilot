@@ -1,0 +1,5 @@
+query,relevant
+servo overcurrent trip,fanuc_servo_alarm.txt
+drive bus undervoltage,rockwell_powerflex_fault.txt
+modbus tcp comms loss,schneider_m340_comms.txt
+overtemperature acceleration,siemens_g120_overcurrent.txt

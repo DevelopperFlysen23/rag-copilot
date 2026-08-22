@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAG//MAINT — Industrial Maintenance Copilot</title>
+  <link rel="stylesheet" href="../common.css" />
+  <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+  <header class="topbar">
+    <span>RAG//MAINT <b>Industrial Maintenance Copilot</b></span>
+    <span class="topbar-status"><span id="sys-status">ONLINE</span> · <span id="index-status">index ready</span> · <span id="cmms-status">CMMS linked</span></span>
+  </header>
+
+  <main class="wrap">
+    <!-- TELEMETRY METRICS -->
+    <section class="metrics">
+      <div class="metric"><span class="m-label">RETRIEVAL LATENCY</span><b id="t-latency" class="m-val">0.0</b><span class="m-unit">ms</span></div>
+      <div class="metric"><span class="m-label">CONTEXT TOKENS</span><b id="t-tokens" class="m-val">0</b><span class="m-unit">tok</span></div>
+      <div class="metric"><span class="m-label">EMBEDDING</span><b id="t-embed" class="m-val">384</b><span class="m-unit">dim</span></div>
+      <div class="metric"><span class="m-label">LLM TEMP</span><b id="t-temp" class="m-val">0.20</b><span class="m-unit">cfg</span></div>
+      <div class="metric"><span class="m-label">INDEXED CHUNKS</span><b id="t-chunks" class="m-val">0</b><span class="m-unit">doc</span></div>
+      <div class="metric"><span class="m-label">UPTIME</span><b id="t-uptime" class="m-val">0</b><span class="m-unit">s</span></div>
+    </section>
+
+    <div class="grid-main">
+      <!-- QUERY PANEL -->
+      <section class="panel">
+        <div class="p-title">CONTEXTUAL QUERY</div>
+        <div class="query-box">
+          <textarea id="query-input" rows="3" placeholder="Describe the fault as shown on the HMI, e.g. &quot;Fault F001 on G120 drive, conveyor line 3&quot;"></textarea>
+          <div class="query-actions">
+            <button id="query-send" class="btn">Retrieve</button>
+            <div class="examples">
+              <button class="ex" data-q="Fault F001 on G120 drive">F001 G120</button>
+              <button class="ex" data-q="Altivar SLF ground fault on motor">SLF Altivar</button>
+              <button class="ex" data-q="Conveyor line 3 E001 estop latched">E001 estop</button>
+              <button class="ex" data-q="PowerFlex F070 net loss comms timeout">F070 comms</button>
+            </div>
+          </div>
+        </div>
+        <div class="p-sub">QUERY HISTORY</div>
+        <div id="query-history" class="history"></div>
+      </section>
+
+      <!-- RETRIEVED CONTEXT -->
+      <section class="panel">
+        <div class="p-title">RETRIEVED CONTEXT</div>
+        <div id="retrieved" class="retrieved"></div>
+        <div id="ctx-answer" class="answer"></div>
+        <button id="cmms-btn" class="btn btn-amber" style="display:none">Open CMMS work order</button>
+      </section>
+
+      <!-- PIPELINE + CHARTS -->
+      <section class="panel">
+        <div class="p-title">RETRIEVAL PIPELINE</div>
+        <div id="pipeline" class="pipeline"></div>
+        <div class="p-sub">LATENCY (ms) — last queries</div>
+        <div id="chart-latency" class="chart"></div>
+        <div class="p-sub">CONTEXT TOKENS — last queries</div>
+        <div id="chart-tokens" class="chart"></div>
+        <div class="p-sub">CHUNK DISTRIBUTION BY VENDOR</div>
+        <div id="chart-dist" class="chart"></div>
+        <div class="p-sub">TOP CONFIDENCE</div>
+        <div id="gauge-confidence" class="gauge"></div>
+      </section>
+    </div>
+
+    <!-- LOG STREAMS -->
+    <div class="grid-logs">
+      <section class="panel">
+        <div class="p-title">SCADA / PLC LOG STREAM</div>
+        <div id="scada-log" class="log"></div>
+      </section>
+      <section class="panel">
+        <div class="p-title">RAG PIPELINE LOG</div>
+        <div id="rag-log" class="log"></div>
+      </section>
+    </div>
+
+    <!-- FEEDBACK -->
+    <section class="panel feedback">
+      <div class="p-title">FACTORY FLOOR FEEDBACK</div>
+      <div class="fb-grid">
+        <div class="fb-metrics">
+          <div class="fb-cell"><span>SYSTEM UPTIME</span><b id="fb-uptime">100.0%</b></div>
+          <div class="fb-cell"><span>RETRIEVAL ACCURACY</span><b id="fb-acc">96.4%</b></div>
+          <div class="fb-cell"><span>CHUNKS CLASSIFIED</span><b id="fb-chunks">0</b></div>
+          <div class="fb-cell"><span>OP RATING</span><b id="fb-rating">4.6 / 5</b></div>
+        </div>
+        <div class="fb-rate">
+          <div class="p-sub">RATING DISTRIBUTION</div>
+          <div id="rating-bars" class="rating-bars"></div>
+        </div>
+        <div class="fb-reviews">
+          <div class="p-sub">OPERATOR REVIEWS</div>
+          <div id="reviews" class="reviews"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/rag.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

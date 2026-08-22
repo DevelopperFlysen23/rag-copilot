@@ -1,0 +1,8 @@
+Rockwell Automation PowerFlex 525 - Fault F007 (Bus Undervoltage)
+Symptom: Drive faults on bus undervoltage during deceleration.
+Checks:
+- Measure the DC bus at the terminals and inspect the DC link capacitors.
+- Enable flux braking / DC injection (P37).
+- Verify supply phase imbalance is below 3 percent.
+- Inspect the pre-charge relay.
+Recovery: add a line reactor, enable the braking resistor, and clear the fault with Reset.
